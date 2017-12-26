@@ -1,0 +1,11 @@
+*.class
+target/
+bin/
+logs/
+.project
+.classpath
+.settings/
+
+# Package Files #
+*.jar
+
