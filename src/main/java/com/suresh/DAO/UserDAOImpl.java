@@ -75,11 +75,11 @@ public class UserDAOImpl implements UserDAO
 	@Override
 	public int updateUser(User user)
 	{
-		logger.info("Entry into updateUser method");
+		logger.info(" Entry into updateUser method ");
 		int executeUpdate = 0;
 		try
 		{
-			preparedStatement = connection.prepareStatement("update users set firstname=?, lastname=?, dob=?, email=?" + "where userid=?");
+			preparedStatement = connection.prepareStatement("update users set firstname=?, lastname=?, dob=?, email=? where userid=?");
 			
 			// Parameters start with 1
 			preparedStatement.setString(1, user.getFirstName());
@@ -103,7 +103,7 @@ public class UserDAOImpl implements UserDAO
 	{
 		logger.info("Entry into getAllUsers method ");
 		List<User> users = new ArrayList<User>();
-		User user =null;
+		User user = null;
 		try
 		{
 			preparedStatement = connection.prepareStatement("select * from users");
@@ -139,12 +139,16 @@ public class UserDAOImpl implements UserDAO
 			ResultSet resultSet = preparedStatement.executeQuery();
 			if(resultSet.next())
 			{
-				user.setUserid(resultSet.getInt("userid"));
+				//user.setUserid(resultSet.getInt("userid"));
                 user.setFirstName(resultSet.getString("firstname"));
                 user.setLastName(resultSet.getString("lastname"));
                 user.setDob(resultSet.getDate("dob"));
                 user.setEmail(resultSet.getString("email"));
 			}
+			
+			//resultSet.close();
+			//preparedStatement.close();
+			//connection.close();
 		}
 		catch (SQLException e)
 		{

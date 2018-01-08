@@ -11,22 +11,26 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class WelcomeServlet
  */
-//@WebServlet("/WelcomeServlet")
-public class WelcomeServlet extends HttpServlet {
+//@WebServlet(urlPatterns = "/LoginServlet",loadOnStartup = 1, asyncSupported = true)
+public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public WelcomeServlet() {
+    public LoginServlet() {
         super();
+        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd =request.getRequestDispatcher("/WEB-INF/pages/index.jsp");
+		String parameter = request.getParameter("back");
+		
+		System.out.println(" Parameter ::: "+parameter);
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/pages/login.jsp");
 		rd.forward(request, response);
 	}
 
@@ -34,7 +38,7 @@ public class WelcomeServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		// TODO Auto-generated method stub
 	}
 
 }

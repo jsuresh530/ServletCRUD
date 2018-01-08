@@ -47,6 +47,7 @@ public class UsersController extends HttpServlet
 		String forward = "";
 		String action = request.getParameter("action");
 		
+		System.out.println("action ::: "+action);
 		if (action.equalsIgnoreCase("delete"))
 		{
 			int userId = Integer.parseInt(request.getParameter("userId"));
@@ -59,6 +60,7 @@ public class UsersController extends HttpServlet
 			forward = INSERT_OR_EDIT;
 			int userId = Integer.parseInt(request.getParameter("userId"));
 			User user = userServiceImpl.getUserById(userId);
+			request.setAttribute("userId", userId);
 			request.setAttribute("user", user);
 		}
 		else if (action.equalsIgnoreCase("listUser"))
@@ -66,10 +68,6 @@ public class UsersController extends HttpServlet
 			forward = LIST_USER;
 			request.setAttribute("users", userServiceImpl.getAllUsers());
 		}
-		/*else if(action == null || action.isEmpty())
-		{
-			forward = LIST_USER;
-		}*/
 		else
 		{
 			forward = INSERT_OR_EDIT;
@@ -83,31 +81,36 @@ public class UsersController extends HttpServlet
 	{
 		logger.info("Inside doPost ");
 		User user = new User();
-		user.setFirstName(request.getParameter("firstName"));
-		user.setLastName(request.getParameter("lastName"));
+		
 		try
 		{
+			user.setFirstName(request.getParameter("firstName"));
+			user.setLastName(request.getParameter("lastName"));
 			Date dob = new SimpleDateFormat("MM/dd/yyyy").parse(request.getParameter("dob"));
 			user.setDob(dob);
+			user.setEmail(request.getParameter("email"));
+			
+			String userid = request.getParameter("userId");
+			if (userid == null || userid.isEmpty())
+			{
+				userServiceImpl.addUser(user);
+			}
+			else
+			{
+				System.out.println(" userid :::  "+userid);
+				user.setUserid(Integer.parseInt(userid));
+				userServiceImpl.updateUser(user);
+			}
+			RequestDispatcher view = request.getRequestDispatcher(LIST_USER);
+			request.setAttribute("users", userServiceImpl.getAllUsers());
+			view.forward(request, response);
+			
 		}
 		catch (ParseException e)
 		{
 			logger.info("Exception ", e.getCause());
 		}
-		user.setEmail(request.getParameter("email"));
-		String userid = request.getParameter("userid");
-		if (userid == null || userid.isEmpty())
-		{
-			userServiceImpl.addUser(user);
-		}
-		else
-		{
-			user.setUserid(Integer.parseInt(userid));
-			userServiceImpl.updateUser(user);
-		}
-		RequestDispatcher view = request.getRequestDispatcher(LIST_USER);
-		request.setAttribute("users", userServiceImpl.getAllUsers());
-		view.forward(request, response);
+		
 	}
 	
 }

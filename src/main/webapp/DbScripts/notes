@@ -1,0 +1,13 @@
+
+    The ServletContext lives for as long as the web app lives. It is shared among all requests in all sessions.
+   
+    The HttpSession lives for as long as the client is interacting with the web app with the same browser instance, and the session hasn't timed out
+     at the server side. It is shared among all requests in the same session.
+    
+    The HttpServletRequest and HttpServletResponse live from the time the servlet receives an HTTP request from the client, until the complete response
+     (the web page) has arrived. It is not shared elsewhere.
+    
+    All Servlet, Filter and Listener instances live as long as the web app lives. They are shared among all requests in all sessions.
+    
+    Any attribute that is defined in ServletContext, HttpServletRequest and HttpSession will live as long as the object in question lives. 
+    The object itself represents the "scope" in bean management frameworks such as JSF, CDI, Spring, etc. Those frameworks store their scoped beans as an attribute of its closest matching scope.

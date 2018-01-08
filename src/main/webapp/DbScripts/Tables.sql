@@ -1,3 +1,6 @@
+CREATE DATABASE `pay_servlet` /*!40100 DEFAULT CHARACTER SET latin1 */;
+
+
 CREATE TABLE `users` (
   `userid` int(11) NOT NULL AUTO_INCREMENT,
   `firstname` varchar(45) DEFAULT NULL,

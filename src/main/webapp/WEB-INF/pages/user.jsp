@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -25,8 +25,8 @@
         });
     </script>
 
-    <form method="POST" action='UsersController' name="frmAddUser">
-        
+    <form method="POST" action='usersController.do' name="frmAddUser">
+        <input type="hidden" value="${userId}" name="userId">
         First Name : <input type="text" name="firstName" value="<c:out value="${user.firstName}" />" /> <br /> 
         Last Name : <input type="text" name="lastName" value="<c:out value="${user.lastName}" />" /> <br /> 
         DOB : <input type="text" name="dob" value="<fmt:formatDate pattern="MM/dd/yyyy" value="${user.dob}" />" /> <br /> 
@@ -35,5 +35,8 @@
         <input type="submit" value="Submit" />
         
     </form>
+    
 </body>
+
+ <a href="login.do">Back</a>
 </html>

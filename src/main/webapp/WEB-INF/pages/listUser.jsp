@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -26,12 +26,12 @@
                     <td><c:out value="${user.lastName}" /></td>
                     <td><fmt:formatDate pattern="yyyy-MMM-dd" value="${user.dob}" /></td>
                     <td><c:out value="${user.email}" /></td>
-                    <td><a href="UsersController?action=edit&userId=<c:out value="${user.userid}"/>">Update</a></td>
-                    <td><a href="UsersController?action=delete&userId=<c:out value="${user.userid}"/>">Delete</a></td>
+                    <td><a href="usersController.do?action=edit&userId=<c:out value="${user.userid}"/>">Update</a></td>
+                    <td><a href="usersController.do?action=delete&userId=<c:out value="${user.userid}"/>">Delete</a></td>
                 </tr>
             </c:forEach>
         </tbody>
     </table>
-    <p><a href="UsersController?action=insert">Add User</a></p>
+    <p><a href="usersController.do?action=insert">Add User</a></p>
 </body>
 </html>
