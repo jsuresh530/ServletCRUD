@@ -1,0 +1,112 @@
+
+
+//create new branch and push to remote
+
+git checkout -b "name"
+git push -u origin "name"
+
+git push origin test-branch
+git branch -r
+
+
+git clone "url"
+git branch
+git status
+git add .
+git checkout "name_of_branch"
+git commit -m "message"
+git push
+git fetch 	(fetches the new created branch in local from remote)
+git merge "branch_to_merge"		(merge changes from branch to current branch)
+
+
+# update remote references ...
+git fetch --all --prune
+
+
+#force checkout to match origin/master with reset
+#  this cannot be undone
+#  best to make a branch first
+git fetch origin
+git reset --hard origin/master
+
+
+# BEFORE RESET -- suggestion for unsaved-changes before a reset to origin/master
+# http://stackoverflow.com/questions/1628088/how-to-reset-my-local-repository-to-be-just-like-the-remote-repository-head
+git commit -a -m "Saving work, just in case"
+git branch my-saved-work
+
+
+#create and checkout a branch
+git branch new-branch-name
+git checkout new-branch-name
+
+
+#checkout and create a new branch
+git checkout -b new-branch-name
+
+
+#rebase from master
+  git fetch origin
+  git pull --rebase origin/master
+
+
+#squashing commits
+  #get the number of commits to squash from git log
+  #  use q to quit the log, up/down arrow to navigate
+  git log
+  
+  #assuming you want to squash the last 3 commits in your local branch
+  # this will open the commits in affect
+  # pick the first and 's' for squash the rest
+  # save and close
+  # next you will have the opportunity to edit the merged commit log
+  #  make your edits, if any, save and close
+  git rebase -i HEAD~3
+  
+  #from here, attempt to push up
+  git push origin my-branch-name
+  
+  #you will likely see an error, if you are the only one working in the remote branch
+  # you may need to --force your push
+  # !!WARNING, always do this in a branch, include the branch name and *NEVER* to master!!
+  git push --force origin my-branc-name
+  
+#rebase branch changes from latest master
+  #ensure latest master
+    git checkout master
+    git pull origin master
+  
+  #ensure latest branch
+    git checkout my-branch
+    git pull origin my-branch
+
+  
+  #rebase branch over master
+    git rebase master
+  
+  #your branch now has master before your changes
+
+  #update remote for rebased local branch
+    git push --force origin my-branch
+
+  # !!! your peer review/pull request, etc should happen here !!!
+  
+  
+  #if you want to avoid the branch/merge in git history, you can do the following
+  
+    #rebase branch onto master
+    git checkout master
+    git rebase my-branch
+  
+    #local master now has my-branch changes
+    git push origin master
+  
+  #now that your changes are in master, you can remove the branch
+    
+    #delete local copy
+    git branch -D my-branch
+    
+    #remove remote copy
+git push origin :my-branch
+
