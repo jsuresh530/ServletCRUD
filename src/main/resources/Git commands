@@ -1,5 +1,4 @@
 
-
 //create new branch and push to remote
 
 git checkout -b "name"
