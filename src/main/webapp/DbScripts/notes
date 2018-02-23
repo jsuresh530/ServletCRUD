@@ -10,4 +10,5 @@
     All Servlet, Filter and Listener instances live as long as the web app lives. They are shared among all requests in all sessions.
     
     Any attribute that is defined in ServletContext, HttpServletRequest and HttpSession will live as long as the object in question lives. 
-    The object itself represents the "scope" in bean management frameworks such as JSF, CDI, Spring, etc. Those frameworks store their scoped beans as an attribute of its closest matching scope.
+    The object itself represents the "scope" in bean management frameworks such as JSF, CDI, Spring, etc. Those frameworks store their 
+    scoped beans as an attribute of its closest matching scope.

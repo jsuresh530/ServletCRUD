@@ -1,0 +1,178 @@
+
+
+The decision between the two will be your first choice in designing a web service, so it is important to understand the pros and cons of the two. It is also important, in the sometimes heated debate between the two philosophies, to separate reality from rhetoric.
+
+REST fundamentals
+
+    Everything in REST is considered as a resource.
+    Every resource is identified by a URI.
+    Uses uniform interfaces. Resources are handled using POST, GET, PUT, DELETE operations which are similar to Create, Read, Update and Delete (CRUD) operations.
+    Be stateless. Every request is an independent request. Each request from client to server must contain all the information necessary to understand the request.
+    Communications are done via representations. E.g., XML, JSON RESTful Web Services. A RESTful web services are based on HTTP methods and the concept of REST. A RESTful web service typically defines the base URI for the services; the supported MIME-types (XML, text, JSON, user-defined, ...) and the set of operations (POST, GET, PUT, DELETE) which are supported.
+
+SOAP fundamentals
+
+    WSDL defines the contract between client and service and is static by its nature.
+    SOAP builds an XML based protocol on top of HTTP or sometimes TCP/IP.
+    SOAP describes functions and types of data.
+    SOAP is a successor of XML-RPC and is very similar, but describes a standard way to communicate.
+    Several programming languages have native support for SOAP, you typically feed it a web service URL, and you can call its web service functions without the need 
+    for specific code.
+    Binary data that is sent must be encoded first into a format such as base64 encoded.
+    Has several protocols and technologies relating to it: WSDL, XSD, SOAP, WS-Addressing.
+
+SOAP vs REST?
+
+One of the major benefits of SOAP is that you have a WSDL service description. You can pretty much discover the service automatically and generate a useable client 
+proxy from that service description (generate the service calls, the necessary data types for the methods and so forth). Note that with version 2.0, WSDL supports all
+ HTTP verbs and can be used to document RESTful services as well, but there is a less verbose alternative in WADL (Web Application Description Language) for that purpose.
+
+With RESTful services, message security is provided by the transport protocol (HTTPS) and is point-to-point only. It doesn’t have a standard messaging system and 
+expects clients to deal with communication failures by retrying. SOAP has successful/retry logic built in and provides end-to-end reliability even through SOAP 
+intermediaries.
+
+One of the major benefits of RESTful API is that it is flexible for data representation, for example, you could serialize your data in either XML or JSON format. 
+RESTful APIs are cleaner or easier to understand because they add an element of using standardized URIs and gives importance to HTTP verb used (i.e., GET, POST, 
+PUT and DELETE).
+
+RESTful services are also lightweight, that is they don’t have a lot of extra XML markup. To invoke RESTful API all you need is a browser or HTTP stack and pretty 
+much every device or machine connected to a network has that.
+
+Advantages of REST
+
+    Since REST uses standard HTTP, it is much simpler in just about every way. Creating clients, developing APIs, the documentation is much easier to understand, and 
+    there aren’t very many things that REST doesn’t do easier/better than SOAP.
+    REST permits many different data formats whereas SOAP only permits XML. While this may seem like it adds complexity to REST because you need to handle multiple 
+    formats, in my experience, it has been quite beneficial. JSON usually is a better fit for data and parses much faster. REST allows better support for browser 
+    clients due to its support for JSON.
+    REST has better performance and scalability. REST reads can be cached; SOAP-based reads cannot be cached.
+    No expensive tools require interacting with the Web service
+    Smaller learning curve
+    Efficient (SOAP uses XML for all messages, REST can use smaller message formats)
+    Fast (no extensive processing required)
+    Closer to other Web technologies in design philosophy
+
+Advantages of SOAP
+
+    WS-Security: While SOAP supports SSL (just like REST) it also supports WS-Security which adds some enterprise security features. Supports identity through 
+    intermediaries, not just point to point (SSL). It also provides a standard implementation of data integrity and data privacy. Calling it “Enterprise” isn’t to 
+    say it’s more secure, it simply supports some security tools that typical internet services do not need for, in fact, they are only needed in a few “enterprise” 
+    scenarios.
+    WS-AtomicTransaction: Need ACID Transactions over a service, you’re going to need SOAP. While REST supports transactions, it isn’t as comprehensive and isn’t ACID 
+    compliant. Fortunately, ACID transactions almost never make sense over the internet. REST is limited by HTTP itself which can’t provide two-phase commit across 
+    distributed transactional resources, but SOAP can. Internet apps don’t need this level of transactional reliability, enterprise apps sometimes do.
+    WS-ReliableMessaging: Rest doesn’t have a standard messaging system and expects clients to deal with communication failures by retrying. SOAP has successful/retry 
+    logic built in and provides end-to-end reliability even through SOAP intermediaries.
+    Language, platform, and transport independent (REST requires use of HTTP)
+    Works well in distributed enterprise environments (REST assumes direct point-to-point communication)
+    Standardized
+    Provides significant pre-build extensibility in the form of the WS standards
+    Built-in error handling
+    Automation when used with certain language products
+
+Where to use REST
+
+areas where REST works well for are:
+
+    Limited bandwidth and resources: remember the return structure is really in any format (developer defined). Plus, any browser can be used because the REST approach 
+    uses the standard GET, PUT, POST, and DELETE verbs. Again, remember that REST can also use the XMLHttpRequest object that most modern browsers support today, 
+    which adds a bonus of AJAX.
+    stateless operations: if an operation needs to be continued, then REST is not the best approach and SOAP may fit it better. However, if you need stateless CRUD 
+    (Create, Read, Update, and Delete) operations, then REST is it.
+    Caching situations: if the information can be cached because of the stateless operation of the REST approach, this is perfect.
+
+Where to use SOAP
+
+areas where SOAP works as a great solution:
+
+    Asynchronous processing and invocation: if your application needs a guaranteed level of reliability and security then SOAP 1.2 offers additional standards to 
+    ensure this type of operation. Things like WSRM – WS-Reliable Messaging.
+    Formal contracts: if both sides (provider and consumer) have to agree on the exchange format then SOAP 1.2 gives the rigid specifications for this type of 
+    interaction.
+    Stateful operations: if the application needs contextual information and conversational state management then SOAP 1.2 has the additional specification in 
+    the WS structure to support those things (Security, Transactions, Coordination, etc.). Comparatively, the REST approach would make the developers build this
+     custom plumbing.
+
+
+
+
+SOAP
+
+    SOAP is a protocol.
+    SOAP stands for Simple Object Access Protocol.
+    SOAP can't use REST because it is a protocol.
+    SOAP uses services interfaces to expose the business logic.
+    SOAP defines standards to be strictly followed.
+    SOAP requires more bandwidth and resource than REST.
+    SOAP defines its own security.
+    SOAP permits XML data format only.
+    SOAP is less preferred than REST.
+
+REST
+
+    REST is an architectural style.
+    REST stands for Representational State Transfer.
+    REST can use SOAP web services because it is a concept and can use any protocol like HTTP, SOAP.
+    REST uses URI to expose business logic.
+    REST does not define too much standards like SOAP.
+    REST requires less bandwidth and resource than SOAP.
+    RESTful web services inherits security measures from the underlying transport.
+    REST permits different data format such as Plain text, HTML, XML, JSON etc.
+    REST more preferred than SOAP.
+
+Rest : Architecture
+SOAP : Protocol
+
+
+ Short & Quick introduction to REST
+
+REST stands for Representational State Transfer.It’s an is an architectural style which can be used to design web services, that can be consumed from a variety of clients. The core idea is that, rather than using complex mechanisms such as CORBA, RPC or SOAP to connect between machines, simple HTTP is used to make calls among them.
+
+In Rest based design, resources are being manipulated using a common set of verbs.
+
+    To Create a resource : HTTP POST should be used
+    To Retrieve a resource : HTTP GET should be used
+    To Update a resource : HTTP PUT should be used
+    To Delete a resource : HTTP DELETE should be used
+
+That means, you as a REST service developer or Client, should comply to above criteria, in order to be REST complained.
+
+Often Rest based Web services return JSON or XML as response, although it is not limited to these types only. Clients can specify (using HTTP Accept header) the
+ resource type they are interested in, and server may return the resource , specifying Content-Type of the resource it is serving. This StackOverflow link is a must
+  read to understand REST in detail. 
+  
+   33
+down vote
+	
+
+What is REST?
+
+REST in official words, REST is an architectural style built on certain principles using the current “Web” fundamentals. There are 5 basic fundamentals of web 
+which are leveraged to create REST services.
+
+    Principle 1: Everything is a Resource In the REST architectural style, data and functionality are considered resources and are accessed using Uniform Resource
+     Identifiers (URIs), typically links on the Web.
+    Principle 2: Every Resource is Identified by a Unique Identifier (URI)
+    Principle 3: Use Simple and Uniform Interfaces
+    Principle 4: Communication is Done by Representation
+    Principle 5: Be Stateless
+
+  
+    
+    After learning to build Spring REST based RESTFul APIs for XML representation and JSON representation, let’s build a RESTFul client to consume APIs which we have 
+    written. Accessing a third-party REST service inside a Spring application revolves around the use of the Spring RestTemplate class. The RestTemplate class is 
+    designed on the same principles as the many other Spring *Template classes (e.g., JdbcTemplate, JmsTemplate ), providing a simplified approach with default 
+    behaviors for performing complex tasks.
+
+    Given that the RestTemplate class is designed to call REST services, it should come as no surprise that its main methods are closely tied to REST’s underpinnings,
+     which are the HTTP protocol’s methods: HEAD, GET, POST, PUT, DELETE, and OPTIONS. E.g. it’s methods are headForHeaders(), getForObject(), postForObject(), put() 
+     and delete() etc.
+     
+     
+    GET request to /api/user/ returns a list of users
+    GET request to /api/user/1 returns the user with ID 1
+    POST request to /api/user/ with a user object as JSON creates a new user
+    PUT request to /api/user/3 with a user object as JSON updates the user with ID 3
+    DELETE request to /api/user/4 deletes the user with ID 4
+    DELETE request to /api/user/ deletes all the users
+     

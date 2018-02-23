@@ -2,3 +2,6 @@ https://www.tellmehow.co/struts2-angularjs-insert-operation-full-example/
 
 
 https://stackoverflow.com/questions/39285563/crud-application-in-angularjs-and-struts2
+
+
+https://stackoverflow.com/questions/23486186/access-tokens-using-2-legged-oauth-2-0-and-apache-oauthclient
