@@ -7,7 +7,21 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-<title>Login Page...</title>
-
 </head>
-<h1>This is header Page</h1>
+<style>
+header {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    background-color: #563d7c;
+    height: 100px;
+}
+h1{
+	color: white;
+}
+</style>
+<header>
+
+<h1 style="float: right">SURESH BABU</h1>
+</header>

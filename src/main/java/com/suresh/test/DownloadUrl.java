@@ -21,12 +21,10 @@ public class DownloadUrl {
 		try {
 			// Create URL object
 			URL url = new URL(webPage);
-			BufferedReader readr = new BufferedReader(new InputStreamReader(
-					url.openStream()));
+			BufferedReader readr = new BufferedReader(new InputStreamReader(url.openStream()));
 
 			// Enter filename in which you want to download
-			BufferedWriter writer = new BufferedWriter(new FileWriter(
-					"src/Download.html"));
+			BufferedWriter writer = new BufferedWriter(new FileWriter("src/Download.html"));
 
 			// read each line from stream till end
 			String line;
@@ -39,9 +37,9 @@ public class DownloadUrl {
 			System.out.println("Successfully Downloaded.");
 		}// Exceptions
 		catch (MalformedURLException mue) {
-			System.out.println("Malformed URL Exception raised");
+			System.out.println("Malformed URL Exception raised "+mue);
 		} catch (IOException ie) {
-			System.out.println("IOException raised");
+			System.out.println("IOException raised "+ie);
 		}
 	}
 }

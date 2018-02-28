@@ -24,6 +24,7 @@ public class DBBroker extends HttpServlet{
 	   */
 	  public void init() throws ServletException
 	  {
+		  System.err.println("*** I am in init  ");
 	    try
 	    {
 	      InitialContext initialContext = new InitialContext();
@@ -55,8 +56,7 @@ public class DBBroker extends HttpServlet{
 	  /**
 	   * Dole out the connections here.
 	   */
-	  public static synchronized Connection getConnection() 
-	  throws SQLException
+	  public static synchronized Connection getConnection() throws SQLException
 	  {
 	    return datasource.getConnection();
 	  }
@@ -72,8 +72,7 @@ public class DBBroker extends HttpServlet{
 	    }
 	    catch (Exception e)
 	    {
-	      System.err.println("DBBroker: Threw an exception closing a database connection");
-	      e.printStackTrace();
+	      System.err.println("DBBroker: Threw an exception closing a database connection "+e.getMessage());
 	    }
 	  }
 

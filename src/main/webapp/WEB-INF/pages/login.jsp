@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<jsp:include page="header.jsp"></jsp:include>
+
+<%@include file="header.jsp" %>
+
 <head>
 <title>Login Page</title>
  <link rel="stylesheet" href="${pageContext.request.contextPath}/resource/css/login.css">
@@ -27,7 +29,7 @@ body {
 
 
  
- <div class="container">
+ <div class="container" style="margin-top:200px;">
     <div class="row">
         <div class="col-md-8 col-md-offset-3">
             <div class="panel panel-default">
@@ -35,31 +37,32 @@ body {
 
                 </div>
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form">
+                    <form class="form-horizontal" role="form" action="login.do" method="post">
                         <div class="form-group">
                             <label for="inputEmail3" class="col-sm-3 control-label">Email</label>
                             <div class="col-sm-9">
-                                <input class="form-control" id="inputEmail3" placeholder="Email" required="" type="email">
+                                <input class="form-control" id="inputEmail3" placeholder="Email" required="" type="email" name="email">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="inputPassword3" class="col-sm-3 control-label">Password</label>
                             <div class="col-sm-9">
-                                <input class="form-control" id="inputPassword3" placeholder="Password" required="" type="password">
+                                <input class="form-control" id="inputPassword3" placeholder="Password" required="" type="password" name="password">
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-sm-offset-3 col-sm-9">
                                 <div class="checkbox">
                                     <label class="">
-                                        <input class="" type="checkbox">Remember me</label>
+                                       <input class="" type="checkbox">Remember me</label>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group last">
                             <div class="col-sm-offset-3 col-sm-9">
-                                <button type="submit" class="btn btn-success btn-sm">Sign in</button>
-                                <button type="reset" class="btn btn-default btn-sm">Reset</button>
+                            	 <input type="submit" value="Submit" />
+                               <!--  <button type="submit" class="btn btn-success btn-sm">Sign in</button>
+                                <button type="reset" class="btn btn-default btn-sm">Reset</button> -->
                             </div>
                         </div>
                     </form>

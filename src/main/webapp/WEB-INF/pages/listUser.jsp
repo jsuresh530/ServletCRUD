@@ -1,37 +1,57 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+ <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<%@include file="header.jsp" %>
 <title>Show All Users</title>
-</head>
+<style>
+body .container-fluid.body-content {
+  position: absolute;
+  top: 90px;
+  bottom: 30px;
+  right: 0;
+  left: 0;
+  overflow-y: auto;
+}
+</style>
 <body>
-    <table border=1>
+<div class="container-fluid body-content">
+
+<h1> Welcome , ${admin}  <a href="logout.do" class="btn btn-primary pull-right" role="button">Logout</a> </h1> 
+    <table border=1 class="table table-bordered">
         <thead>
             <tr>
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>DOB</th>
                 <th>Email</th>
-                <th colspan=2>Action</th>
+                <th colspan=2 style="text-align:center">Actions</th>
             </tr>
         </thead>
         <tbody>
+        <c:if test="${fn:length(users) > 0}">
+            
             <c:forEach items="${users}" var="user">
-                <tr>
-                    <td><c:out value="${user.firstName}" /></td>
-                    <td><c:out value="${user.lastName}" /></td>
-                    <td><fmt:formatDate pattern="yyyy-MMM-dd" value="${user.dob}" /></td>
-                    <td><c:out value="${user.email}" /></td>
-                    <td><a href="usersController.do?action=edit&userId=<c:out value="${user.userid}"/>">Update</a></td>
-                    <td><a href="usersController.do?action=delete&userId=<c:out value="${user.userid}"/>">Delete</a></td>
-                </tr>
+	                <tr>
+	                    <td><c:out value="${user.firstName}" /></td>
+	                    <td><c:out value="${user.lastName}" /></td>
+	                    <td><fmt:formatDate pattern="yyyy-MMM-dd" value="${user.dob}" /></td>
+	                    <td><c:out value="${user.email}" /></td>
+	                    <td><a href="usersController.do?action=edit&userId=<c:out value="${user.userid}"/>">Edit</a></td>
+	                    <td><a href="usersController.do?action=delete&userId=<c:out value="${user.userid}"/>">Delete</a></td>
+	                </tr>
             </c:forEach>
+            </c:if>
+            
+             <c:if test="${fn:length(users) == 0}">
+             	<tr> <td colspan="5" style="text-align:center"> <h2> No records to display. </h2> </td> </tr>
+             </c:if>
         </tbody>
     </table>
-    <p><a href="usersController.do?action=insert">Add User</a></p>
+    <a href="usersController.do?action=insert" class="btn btn-primary" role="button">Add User</a>
+    
+    </div>
 </body>
-</html>
+
+<%@include file="footer.jsp" %>

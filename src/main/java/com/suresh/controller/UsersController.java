@@ -33,6 +33,7 @@ public class UsersController extends HttpServlet
 	
 	private static String		INSERT_OR_EDIT		= "/WEB-INF/pages/user.jsp";
 	private static String		LIST_USER			= "/WEB-INF/pages/listUser.jsp";
+	private static String		LOGIN			= "/WEB-INF/pages/login.jsp";
 	
 	public UsersController()
 	{
@@ -67,6 +68,10 @@ public class UsersController extends HttpServlet
 		{
 			forward = LIST_USER;
 			request.setAttribute("users", userServiceImpl.getAllUsers());
+		}
+		else if (action.equalsIgnoreCase("login"))
+		{
+			forward = LOGIN;
 		}
 		else
 		{

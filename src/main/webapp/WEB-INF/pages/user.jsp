@@ -1,11 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 
+<%@include file="header.jsp" %>
 <%-- 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resource/css/jquery-ui.css"> 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resource/css/style.css"> 
@@ -17,26 +14,66 @@
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <title>Add new user</title>
-</head>
-<body>
-    <script>
+<style>
+body {
+    margin: 0 0 100px; /* bottom = footer height */
+    padding: 25px;
+}
+</style>
+<body >
+<div class="container" style="margin-top:200px;">
+    <form method="POST" action='usersController.do' name="frmAddUser" class="form-horizontal">
+    <input type="hidden" value="${userId}" name="userId">
+    
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="firstName">First Name:</label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control" id="firstName" placeholder="Enter firstName" name="firstName" value="${user.firstName}">
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="lastName">Last Name:</label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control" id="lastName" placeholder="Enter lastName" name="lastName" value="${user.lastName}">
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="dob">Date of Birth:</label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control" id="dob" placeholder="Enter Date of birth" name="dob" value="<fmt:formatDate pattern="MM/dd/yyyy" value="${user.dob}" />">
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="firstName">Email:</label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control" id="email" placeholder="Enter email" name="email" value="${user.email}">
+      </div>
+    </div>
+        
+        <div class="form-group">        
+		      <div class="col-sm-offset-2 col-sm-10">
+		        <button type="submit" class="btn btn-primary">Submit</button>
+		      </div>
+    	</div>
+        
+    </form>
+    </div>
+    
+    <div class="form-group">        
+		      <div class="col-sm-offset-2 col-sm-10">
+		        <a href="usersController.do?action=listUser" class="btn btn-primary pull-right" role="button">Go Back</a>
+		      </div>
+    </div>
+    
+</body>
+
+	<script>
         $(function() {
             $('input[name=dob]').datepicker();
         });
     </script>
-
-    <form method="POST" action='usersController.do' name="frmAddUser">
-        <input type="hidden" value="${userId}" name="userId">
-        First Name : <input type="text" name="firstName" value="<c:out value="${user.firstName}" />" /> <br /> 
-        Last Name : <input type="text" name="lastName" value="<c:out value="${user.lastName}" />" /> <br /> 
-        DOB : <input type="text" name="dob" value="<fmt:formatDate pattern="MM/dd/yyyy" value="${user.dob}" />" /> <br /> 
-        Email : <input type="text" name="email" value="<c:out value="${user.email}" />" /> <br /> 
-        
-        <input type="submit" value="Submit" />
-        
-    </form>
     
-</body>
-
- <a href="login.do">Back</a>
-</html>
+<%@include file="footer.jsp" %>
