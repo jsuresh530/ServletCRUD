@@ -11,11 +11,14 @@ public class User
 	/**
 	 * 
 	 */
-	private int					userid;
-	private String				firstName;
-	private String				lastName;
-	private Date				dob;
-	private String				email;
+	private int		userid;
+	private String	firstName;
+	private String	lastName;
+	private Date	dob;
+	private String	email;
+	private int	userTypeId;
+	
+	private String	password;
 	
 	public User()
 	{}
@@ -70,7 +73,24 @@ public class User
 		this.email = email;
 	}
 	
-	/*public static void main(String[] args) {
-		System.out.println(System.getProperty("user.name"));
-	}*/
+	public String getPassword()
+	{
+		return password;
+	}
+	
+	public void setPassword(String password)
+	{
+		this.password = password;
+	}
+
+	public int getUserTypeId()
+	{
+		return userTypeId;
+	}
+
+	public void setUserTypeId(int userTypeId)
+	{
+		this.userTypeId = userTypeId;
+	}
+
 }

@@ -16,7 +16,7 @@
 <title>Add new user</title>
 <style>
 body {
-    margin: 0 0 100px; /* bottom = footer height */
+    margin: 0 0 100px;
     padding: 25px;
 }
 </style>
@@ -24,34 +24,43 @@ body {
 <div class="container" style="margin-top:200px;">
     <form method="POST" action='usersController.do' name="frmAddUser" class="form-horizontal">
     <input type="hidden" value="${userId}" name="userId">
-    
+    <input type="text" value="${action}" id="action">
     <div class="form-group">
-      <label class="control-label col-sm-2" for="firstName">First Name:</label>
+      <label class="control-label col-sm-2" for="firstName">First Name *</label>
       <div class="col-sm-8">
-        <input type="text" class="form-control" id="firstName" placeholder="Enter firstName" name="firstName" value="${user.firstName}">
+        <input type="text" class="form-control" id="firstName" placeholder="Enter firstName" name="firstName" value="${user.firstName}" required="required">
       </div>
     </div>
     
     <div class="form-group">
-      <label class="control-label col-sm-2" for="lastName">Last Name:</label>
+      <label class="control-label col-sm-2" for="lastName">Last Name</label>
       <div class="col-sm-8">
         <input type="text" class="form-control" id="lastName" placeholder="Enter lastName" name="lastName" value="${user.lastName}">
       </div>
     </div>
     
     <div class="form-group">
-      <label class="control-label col-sm-2" for="dob">Date of Birth:</label>
+      <label class="control-label col-sm-2" for="dob">Date of Birth *</label>
       <div class="col-sm-8">
-        <input type="text" class="form-control" id="dob" placeholder="Enter Date of birth" name="dob" value="<fmt:formatDate pattern="MM/dd/yyyy" value="${user.dob}" />">
+        <input type="text" class="form-control" id="dob" required="required" placeholder="Enter Date of birth" name="dob" value="<fmt:formatDate pattern="MM/dd/yyyy" value="${user.dob}" />">
       </div>
     </div>
     
     <div class="form-group">
-      <label class="control-label col-sm-2" for="firstName">Email:</label>
+      <label class="control-label col-sm-2" for="firstName">Email *</label>
       <div class="col-sm-8">
-        <input type="text" class="form-control" id="email" placeholder="Enter email" name="email" value="${user.email}">
+        <input type="text" class="form-control" id="email" placeholder="Enter email" name="email" value="${user.email}" required="required">
       </div>
     </div>
+    
+    <c:if test="${action != 'edit'}">
+	    <div class="form-group">
+	      <label class="control-label col-sm-2" for="password">Password *</label>
+	      <div class="col-sm-8">
+	        <input type="password" class="form-control" id="password" placeholder="Enter password" name="password"  required="required">
+	      </div>
+	    </div>
+     </c:if>
         
         <div class="form-group">        
 		      <div class="col-sm-offset-2 col-sm-10">
@@ -62,12 +71,23 @@ body {
     </form>
     </div>
     
-    <div class="form-group">        
+    <c:if test="${action == 'edit'}">
+    	<div class="form-group">        
 		      <div class="col-sm-offset-2 col-sm-10">
-		        <a href="usersController.do?action=listUser" class="btn btn-primary pull-right" role="button">Go Back</a>
+		        <a href="usersController.do?action=listUser" class="btn btn-primary pull-right" role="button">Back</a>
 		      </div>
-    </div>
+    	</div>
+    </c:if>
     
+    <c:if test="${addUser == '1'}">
+    	<div class="form-group">        
+		      <div class="col-sm-offset-2 col-sm-10">
+		        <a href="login.do" class="btn btn-primary pull-right" role="button">Back to login</a>
+		      </div>
+    	</div>
+    </c:if>
+    
+    ${login}
 </body>
 
 	<script>

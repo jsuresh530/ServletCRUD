@@ -18,7 +18,7 @@ body .container-fluid.body-content {
 <body>
 <div class="container-fluid body-content">
 
-<h1> Welcome , ${admin}  <a href="logout.do" class="btn btn-primary pull-right" role="button">Logout</a> </h1> 
+<h1 style="color: red;"> Welcome , ${admin}  <a href="logout.do" class="btn btn-primary pull-right" role="button">Logout</a> </h1> 
     <table border=1 class="table table-bordered">
         <thead>
             <tr>
@@ -49,7 +49,6 @@ body .container-fluid.body-content {
              </c:if>
         </tbody>
     </table>
-    <a href="usersController.do?action=insert" class="btn btn-primary" role="button">Add User</a>
     
     </div>
 </body>

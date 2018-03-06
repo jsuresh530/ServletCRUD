@@ -85,6 +85,21 @@
 			<artifactId>jstl</artifactId>
 			<version>${jstl-version}</version>
 		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/javax.xml/jaxp-api -->
+		<dependency>
+		    <groupId>javax.xml</groupId>
+		    <artifactId>jaxp-api</artifactId>
+		    <version>1.4.2</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/commons-dbutils/commons-dbutils -->
+		<dependency>
+		    <groupId>commons-dbutils</groupId>
+		    <artifactId>commons-dbutils</artifactId>
+		    <version>1.6</version>
+		</dependency>
+
   </dependencies>
   
   <build>

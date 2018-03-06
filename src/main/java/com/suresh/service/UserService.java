@@ -12,4 +12,6 @@ public interface UserService
 	public List<User> getAllUsers();
 	
 	public User getUserById(int userId);
+	
+	int getUserTypeID(String email, String password);
 }

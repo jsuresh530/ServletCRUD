@@ -23,8 +23,10 @@ public class LoginServlet extends HttpServlet {
 	private UserServiceImpl		userServiceImpl = null;
 	private static String		LIST_USER			= "/WEB-INF/pages/listUser.jsp";
 	private static String		LOGIN			= "/WEB-INF/pages/login.jsp";
+	private static String		USER_PAGE			= "/WEB-INF/pages/userPage.jsp";
+	
 	String forward = "";
-       
+     //  sdfgssgsg
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -50,17 +52,25 @@ public class LoginServlet extends HttpServlet {
 		logger.info("Entry into  doPost LoginServlet");
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
+		 
+		int userTypeID = userServiceImpl.getUserTypeID(email, password);
 		
-		if(email.equalsIgnoreCase("admin@gmail.com") && password.equalsIgnoreCase("admin"))
+		if(userTypeID == 1)
 		{
 			forward = LIST_USER;
 			request.setAttribute("users", userServiceImpl.getAllUsers());
 			request.getSession(true).setAttribute("admin", email);
 		}
+		else if(userTypeID == 2)
+		{
+			forward = USER_PAGE;
+			request.getSession(true).setAttribute("user", email);
+		}
 		else
 		{
 			forward = LOGIN;
 		}
+		
 		//response.sendRedirect("https://www.google.com");
 		RequestDispatcher rd =getServletContext().getRequestDispatcher(forward);
 		rd.include(request, response);

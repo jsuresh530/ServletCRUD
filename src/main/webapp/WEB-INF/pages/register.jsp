@@ -85,10 +85,12 @@
 
                     <div class="form-group">
                         <div class="col-md-12">
-                            <button type="submit" class="btn btn-primary">
+                        
+                        <a href="usersController.do?action=insert" class="btn btn-primary" role="button">Register</a>
+                            <!-- <button type="submit" class="btn btn-primary">
                                 Register
                             </button>
-                            <a href="#">Already have an account?</a>
+                            <a href="#">Already have an account?</a> -->
                         </div>
                     </div>
 

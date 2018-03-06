@@ -67,7 +67,7 @@ body {
                         </div>
                     </form>
                 </div>
-                <div class="panel-footer">Not Registered? <a href="RegisterServlet">Register here</a>
+                <div class="panel-footer">Not Registered? <a href="usersController.do?action=insert" class="btn btn-primary" role="button">Sign up here</a>
                 </div>
             </div>
         </div>

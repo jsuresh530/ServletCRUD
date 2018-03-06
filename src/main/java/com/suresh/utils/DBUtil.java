@@ -20,17 +20,32 @@ public class DBUtil
 	private static final Logger	logger		= LoggerFactory.getLogger(DBUtil.class);
 	private static Connection	connection	= null;
 	
-	public static Connection getConnection()
+	public static void shutConnection(Connection connection)
 	{
-		logger.info("Inside getConnection() method.");
-		Properties prop = new Properties();
-		if (connection != null)
-			return connection;
-		else
+		if(connection != null)
 		{
 			try
 			{
-				InputStream resourceAsStream = DBUtil.class.getClassLoader().getResourceAsStream("/db.properties");
+				connection.close();
+			}
+			catch (SQLException e)
+			{
+				logger.error("Inside shutConnection() method.");
+			}
+		}
+	}
+	public static Connection getConnection()
+	{
+		logger.info("Inside getConnection() method.");
+		InputStream resourceAsStream = null;
+		Properties prop = new Properties();
+		/*if (connection != null)
+			return connection;
+		else
+		{*/
+			try
+			{
+				resourceAsStream = DBUtil.class.getClassLoader().getResourceAsStream("/db.properties");
 				prop.load(resourceAsStream);
 				
 				String driver = prop.getProperty("driver");
@@ -43,33 +58,21 @@ public class DBUtil
 			}
 			catch (ClassNotFoundException e)
 			{
-				logger.error("ERROR.", e.getCause());
+				logger.error("ERROR."+e.getCause());
 			}
 			catch (SQLException e)
 			{
-				logger.error("ERROR.", e.getCause());
+				logger.error("ERROR."+e.getCause());
 			}
 			catch (FileNotFoundException e)
 			{
-				logger.error("ERROR.", e.getCause());
+				logger.error("ERROR."+e.getCause());
 			}
 			catch (IOException e)
 			{
-				logger.error("ERROR.", e.getCause());
+				logger.error("ERROR."+e.getCause());
 			}
-			/*finally
-			{
-				try
-				{
-					if(connection != null)
-					connection.close();
-				}
-				catch (SQLException e)
-				{
-					logger.error("ERROR.", e.getMessage());
-				}
-			}*/
-		}
+		//}
 		logger.info("Exit from getConnection() method. ");
 		return connection;
 	}

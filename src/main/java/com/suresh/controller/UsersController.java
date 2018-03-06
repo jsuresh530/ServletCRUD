@@ -63,6 +63,7 @@ public class UsersController extends HttpServlet
 			User user = userServiceImpl.getUserById(userId);
 			request.setAttribute("userId", userId);
 			request.setAttribute("user", user);
+			request.setAttribute("action", action);
 		}
 		else if (action.equalsIgnoreCase("listUser"))
 		{
@@ -71,6 +72,7 @@ public class UsersController extends HttpServlet
 		}
 		else if (action.equalsIgnoreCase("login"))
 		{
+			request.setAttribute("action", action);
 			forward = LOGIN;
 		}
 		else
@@ -86,7 +88,7 @@ public class UsersController extends HttpServlet
 	{
 		logger.info("Inside doPost ");
 		User user = new User();
-		
+		int addUser = 0;
 		try
 		{
 			user.setFirstName(request.getParameter("firstName"));
@@ -94,21 +96,31 @@ public class UsersController extends HttpServlet
 			Date dob = new SimpleDateFormat("MM/dd/yyyy").parse(request.getParameter("dob"));
 			user.setDob(dob);
 			user.setEmail(request.getParameter("email"));
-			
+			user.setPassword(request.getParameter("password"));
+			//String action = request.getParameter("action");
 			String userid = request.getParameter("userId");
-			if (userid == null || userid.isEmpty())
+			
+			if(userid != null && !userid.isEmpty() && Integer.valueOf(userid) > 0)
 			{
-				userServiceImpl.addUser(user);
+				user.setUserid(Integer.parseInt(userid));
+				userServiceImpl.updateUser(user);
+				
+				RequestDispatcher view = request.getRequestDispatcher(LIST_USER);
+				request.setAttribute("users", userServiceImpl.getAllUsers());
+				view.forward(request, response);
 			}
 			else
 			{
-				System.out.println(" userid :::  "+userid);
-				user.setUserid(Integer.parseInt(userid));
-				userServiceImpl.updateUser(user);
+				addUser = userServiceImpl.addUser(user);
 			}
-			RequestDispatcher view = request.getRequestDispatcher(LIST_USER);
-			request.setAttribute("users", userServiceImpl.getAllUsers());
-			view.forward(request, response);
+			
+			if(addUser == 1)
+			{
+				RequestDispatcher view = request.getRequestDispatcher(INSERT_OR_EDIT);
+				request.setAttribute("login", "Registration is successful, Please login to your account");
+				request.setAttribute("addUser", addUser);
+				view.forward(request, response);
+			}
 			
 		}
 		catch (ParseException e)

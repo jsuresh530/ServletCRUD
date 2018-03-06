@@ -16,8 +16,7 @@ public class UserServiceImpl implements UserService
 	@Override
 	public int addUser(User user)
 	{
-		int addUser = daoImpl.addUser(user);
-		return addUser;
+		return daoImpl.addUser(user);
 	}
 	
 	@Override
@@ -38,6 +37,14 @@ public class UserServiceImpl implements UserService
 	public List<User> getAllUsers()
 	{
 		List<User> allUsers = daoImpl.getAllUsers();
+		for (User user : allUsers)
+		{
+			if(user.getUserTypeId() == 1)
+			{
+				allUsers.remove(1);
+				break;
+			}
+		}
 		return allUsers;
 	}
 	
@@ -46,5 +53,12 @@ public class UserServiceImpl implements UserService
 	{
 		User userById = daoImpl.getUserById(userId);
 		return userById;
+	}
+
+	@Override
+	public int getUserTypeID(String email, String password)
+	{
+		int userTypeID = daoImpl.getUserTypeID(email, password);
+		return userTypeID;
 	}
 }

@@ -13,4 +13,6 @@ public interface UserDAO
 	
 	public User getUserById(int userId);
 	
+	int getUserTypeID(String email, String password);
+	
 }
