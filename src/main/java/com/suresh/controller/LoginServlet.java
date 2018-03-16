@@ -60,6 +60,7 @@ public class LoginServlet extends HttpServlet {
 			forward = LIST_USER;
 			request.setAttribute("users", userServiceImpl.getAllUsers());
 			request.getSession(true).setAttribute("admin", email);
+			
 		}
 		else if(userTypeID == 2)
 		{

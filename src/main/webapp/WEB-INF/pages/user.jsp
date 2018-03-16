@@ -23,8 +23,8 @@ body {
 <body >
 <div class="container" style="margin-top:200px;">
     <form method="POST" action='usersController.do' name="frmAddUser" class="form-horizontal">
-    <input type="hidden" value="${userId}" name="userId">
-    <input type="text" value="${action}" id="action">
+    <input type ="hidden" value ="${userId}" name ="userId">
+    <input type ="hidden" value ="${action}" id ="action">
     <div class="form-group">
       <label class="control-label col-sm-2" for="firstName">First Name *</label>
       <div class="col-sm-8">

@@ -3,33 +3,22 @@
 
 <%@include file="header.jsp" %>
 
-<head>
+
 <title>Login Page</title>
- <link rel="stylesheet" href="${pageContext.request.contextPath}/resource/css/login.css">
-</head>
 <style>
 
-body { 
- background: url('/assets/example/bg_suburb.jpg') no-repeat center center fixed; 
- -webkit-background-size: cover;
- -moz-background-size: cover;
- -o-background-size: cover;
- background-size: cover;
-}
-
-.panel-default {
- opacity: 0.9;
- margin-top:30px;
-}
-.form-group.last {
- margin-bottom:0px;
-}
+#msg {
+    text-align: center;
+    width: 324px;
+    margin-left: 188px;
+    margin-bottom: 10px;
+    };
 </style>
+
 <body>
-
-
- 
+  
  <div class="container" style="margin-top:200px;">
+ 
     <div class="row">
         <div class="col-md-8 col-md-offset-3">
             <div class="panel panel-default">
@@ -37,17 +26,22 @@ body {
 
                 </div>
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" action="login.do" method="post">
+				
+				<div  id="msg" >
+				    
+			  </div>
+                
+                    <form class="form-horizontal" role="form" method="post" id="myForm" action="login.do">
                         <div class="form-group">
-                            <label for="inputEmail3" class="col-sm-3 control-label">Email</label>
+                            <label for="email" class="col-sm-3 control-label">Email</label>
                             <div class="col-sm-9">
-                                <input class="form-control" id="inputEmail3" placeholder="Email" required="" type="email" name="email">
+                                <input class="form-control" id="email" placeholder="Email" type="email" name="email">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="inputPassword3" class="col-sm-3 control-label">Password</label>
+                            <label for="password" class="col-sm-3 control-label">Password</label>
                             <div class="col-sm-9">
-                                <input class="form-control" id="inputPassword3" placeholder="Password" required="" type="password" name="password">
+                                <input class="form-control" id="password" placeholder="Password" type="password" name="password">
                             </div>
                         </div>
                         <div class="form-group">
@@ -60,81 +54,91 @@ body {
                         </div>
                         <div class="form-group last">
                             <div class="col-sm-offset-3 col-sm-9">
-                            	 <input type="submit" value="Submit" />
-                               <!--  <button type="submit" class="btn btn-success btn-sm">Sign in</button>
-                                <button type="reset" class="btn btn-default btn-sm">Reset</button> -->
+                                <input type="submit"  id="login" class="btn btn-primary" role="button" >
                             </div>
                         </div>
                     </form>
                 </div>
-                <div class="panel-footer">Not Registered? <a href="usersController.do?action=insert" class="btn btn-primary" role="button">Sign up here</a>
+                <div class="panel-footer">Not User ? <a href="usersController.do?action=insert" class="btn btn-primary" role="button">Create account here.</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- <section id="login">
-    <div class="container">
-    	<div class="row">
-    	    <div class="col-xs-12">
-        	    <div class="form-wrap">
-                <h1>Log in here</h1>
-                    <form role="form" action="javascript:;" method="post" id="login-form" autocomplete="off">
-                        <div class="form-group">
-                            <label for="email" class="sr-only">Email</label>
-                            <input type="email" name="email" id="email" class="form-control" placeholder="somebody@example.com">
-                        </div>
-                        <div class="form-group">
-                            <label for="key" class="sr-only">Password</label>
-                            <input type="password" name="key" id="key" class="form-control" placeholder="Password">
-                        </div>
-                        <div class="checkbox">
-                            <span class="character-checkbox" onclick="showPassword()"></span>
-                            <span class="label">Show password</span>
-                        </div>
-                        <input type="submit" id="btn-login" class="btn btn-custom btn-lg btn-block" value="Log in">
-                    </form>
-                    <a href="javascript:;" class="forget" data-toggle="modal" data-target=".forget-modal">Forgot your password?</a>
-                    <hr>
-        	    </div>
-    		</div> /.col-xs-12
-    	</div> /.row
-    </div> /.container
-</section>
+<!-- <div class="alert alert-success alert-dismissible">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong>Success!</strong> This alert box could indicate a successful or positive action.
+  </div>
+  <div class="alert alert-info alert-dismissible">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong>Info!</strong> This alert box could indicate a neutral informative change or action.
+  </div>
+  <div class="alert alert-warning alert-dismissible">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong>Warning!</strong> This alert box could indicate a warning that might need attention.
+  </div>
+  <div class="alert alert-danger alert-dismissible">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong>Danger!</strong> This alert box could indicate a dangerous or potentially negative action.
+  </div> -->
+  
+<script type="text/javascript">
 
-<div class="modal fade forget-modal" tabindex="-1" role="dialog" aria-labelledby="myForgetModalLabel" aria-hidden="true">
-	<div class="modal-dialog modal-sm">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal">
-					<span aria-hidden="true">×</span>
-					<span class="sr-only">Close</span>
-				</button>
-				<h4 class="modal-title">Recovery password</h4>
-			</div>
-			<div class="modal-body">
-				<p>Type your email account</p>
-				<input type="email" name="recovery-email" id="recovery-email" class="form-control" autocomplete="off">
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-				<button type="button" class="btn btn-custom">Recovery</button>
-			</div>
-		</div> /.modal-content
-	</div> /.modal-dialog
-</div> /.modal
+$(document).ready(function(){
+	//$('#msg').hide();
+});
 
-<footer id="footer">
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12">
-                <p>Page © - 2017</p>
-            </div>
-        </div>
-    </div>
-</footer> -->
-
+	$("#login").on('click', function(){
+		
+		
+		var email = $("#email").val();
+		var password = $("#password").val();
+		
+		if(email == ""){
+			//alert(1)
+			$("#msg").css("border","2px solid green");
+			$("#msg").text('email is required..');
+            return false;
+        }
+        if(password == ""){
+            $("#msg").text('password is required..');
+            //$("#password").addClass('error');
+            //alert("Password is required");
+            return false;
+        }
+        return true;
+        
+        /* $.ajax({
+            url : "login.do",
+            method : get,
+            data : {
+            	email : email,
+                password : password
+            },
+            success : function(results){
+                if(results != null && results != ""){
+                    showMessage(results);
+                    $('#messageDiv').css("display","block");
+                }else{
+                    $('#messageDiv').css("display","none");
+                    $('#messageDiv').html("");
+                    alert("Some exception occurred! Please try again.");
+                }
+            }
+        }); */
+        
+	});
+	
+	function showMessage(results){
+        if(results == 'SUCCESS'){
+            $('#messageDiv').html("<font color='green'>You are successfully logged in. </font>")
+        }else if(results == 'FAILURE'){
+            $('#messageDiv').html("<font color='red'>Username or password incorrect </font>")
+        }
+    }
+	
+</script>
 
 </body>
 </html>
