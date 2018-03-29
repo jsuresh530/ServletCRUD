@@ -6,7 +6,7 @@
 <title>User Page</title>
 
 <body>
-<h1 style="color: red; margin-top: 150px; margin-right: 75px;"> Welcome , ${user}  <a href="logout.do" class="btn btn-primary pull-right" role="button">Logout</a> </h1> 
+<h1 style="color: red; margin-top: 150px; margin-right: 75px;"> Welcome , ${user}  <a href="logout.do" class="btn btn-primary pull-right" role="button" style="background-color: #337ab7" >Logout</a> </h1> 
 
  
 </body>

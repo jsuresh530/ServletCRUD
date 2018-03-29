@@ -1,6 +1,5 @@
 package com.suresh.model;
 
-import java.util.Date;
 
 /**
  * @author Suresh Babu J
@@ -14,9 +13,10 @@ public class User
 	private int		userid;
 	private String	firstName;
 	private String	lastName;
-	private Date	dob;
+	private String	dob;
 	private String	email;
 	private int	userTypeId;
+	private String fileName;
 	
 	private String	password;
 	
@@ -53,16 +53,6 @@ public class User
 		this.lastName = lastName;
 	}
 	
-	public Date getDob()
-	{
-		return dob;
-	}
-	
-	public void setDob(Date dob)
-	{
-		this.dob = dob;
-	}
-	
 	public String getEmail()
 	{
 		return email;
@@ -91,6 +81,50 @@ public class User
 	public void setUserTypeId(int userTypeId)
 	{
 		this.userTypeId = userTypeId;
+	}
+
+	public String getFileName()
+	{
+		return fileName;
+	}
+
+	public void setFileName(String fileName)
+	{
+		this.fileName = fileName;
+	}
+
+	@Override
+	public String toString()
+	{
+		StringBuilder builder = new StringBuilder();
+		builder.append("User [userid=");
+		builder.append(userid);
+		builder.append(", firstName=");
+		builder.append(firstName);
+		builder.append(", lastName=");
+		builder.append(lastName);
+		builder.append(", dob=");
+		builder.append(getDob());
+		builder.append(", email=");
+		builder.append(email);
+		builder.append(", userTypeId=");
+		builder.append(userTypeId);
+		builder.append(", fileName=");
+		builder.append(fileName);
+		builder.append(", password=");
+		builder.append(password);
+		builder.append("]");
+		return builder.toString();
+	}
+
+	public String getDob()
+	{
+		return dob;
+	}
+
+	public void setDob(String dob)
+	{
+		this.dob = dob;
 	}
 
 }

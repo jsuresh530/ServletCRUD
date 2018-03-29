@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
- <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <%@include file="header.jsp" %>
 <title>Show All Users</title>
@@ -18,7 +18,7 @@ body .container-fluid.body-content {
 <body>
 <div class="container-fluid body-content">
 
-<h1 style="color: red;"> Welcome , ${admin}  <a href="logout.do" class="btn btn-primary pull-right" role="button">Logout</a> </h1> 
+<h1 style="color: red;"> Welcome , ${admin}  <a href="logout.do" class="btn btn-primary pull-right" role="button" style="background-color: #337ab7">Logout</a> </h1> 
     <table border=1 class="table table-bordered">
         <thead>
             <tr>
@@ -26,6 +26,7 @@ body .container-fluid.body-content {
                 <th>Last Name</th>
                 <th>DOB</th>
                 <th>Email</th>
+                <th>File</th>
                 <th colspan=2 style="text-align:center">Actions</th>
             </tr>
         </thead>
@@ -35,11 +36,12 @@ body .container-fluid.body-content {
             <c:forEach items="${users}" var="user">
 	                <tr>
 	                    <td><c:out value="${user.firstName}" /></td>
-	                    <td><c:out value="${user.lastName}" /></td>
-	                    <td><fmt:formatDate pattern="yyyy-MMM-dd" value="${user.dob}" /></td>
+	                    <td><c:out value="${user.lastName}" /></td> 
+	                    <td><c:out value="${user.dob}" /></td>
 	                    <td><c:out value="${user.email}" /></td>
-	                    <td><a href="usersController.do?action=edit&userId=<c:out value="${user.userid}"/>">Edit</a></td>
-	                    <td><a href="usersController.do?action=delete&userId=<c:out value="${user.userid}"/>">Delete</a></td>
+	                    <td title="Click here to download"><a href="downloadFile.do?fileName=<c:out value="${user.fileName}"/>" style="background-color: #337ab7"> <c:out value="${user.fileName}" /> </a></td>
+	                    <td title="Click here to edit user details"><a href="usersController.do?action=edit&userId=<c:out value="${user.userid}"/>" style="background-color: #337ab7">Edit</a></td>
+	                    <td title="Click here to delete user"><a href="usersController.do?action=delete&userId=<c:out value="${user.userid}"/>" style="background-color: #337ab7">Delete</a></td>
 	                </tr>
             </c:forEach>
             </c:if>
@@ -53,4 +55,31 @@ body .container-fluid.body-content {
     </div>
 </body>
 
+<script type="text/javascript">
+
+function downloadFile(filename)
+{
+	var action = "downloadFile.do";
+	//var url = action + "?fileName="+method+"&documentId=" +filename;
+    var url = action + "?fileName="+filename;
+    alert(url)
+    $.ajax({
+          url: url,
+          dataType: "text", // Change dataType to "text"
+          type: 'GET',
+          success: function(data){
+              if (data == "FAIL") {
+                  alert("File not found!");
+              } else {
+                  window.location.href = data; // Download the file
+              }
+          },
+          error: function (request, status, error) {
+              alert("The request failed: " + request.responseText);
+          }
+    });
+	
+}
+
+</script>
 <%@include file="footer.jsp" %>

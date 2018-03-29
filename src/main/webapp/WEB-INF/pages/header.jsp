@@ -24,8 +24,22 @@ header {
 h1{
 	color: white;
 }
+a:link, a:visited {
+    background-color: #f4c542;
+    color: white;
+    padding: 14px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+
+a:hover, a:active {
+    background-color: #f4c542;
+}
+
 </style>
 <header>
 
-<h1 style="float: right">SURESH BABU</h1>
+<h1 style="float: right"> <a href="login.do" > SURESH BABU </a></h1>
 </header>

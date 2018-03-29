@@ -54,12 +54,12 @@
                         </div>
                         <div class="form-group last">
                             <div class="col-sm-offset-3 col-sm-9">
-                                <input type="submit"  id="login" class="btn btn-primary" role="button" >
+                                <input type="submit"  id="login" class="btn btn-primary">
                             </div>
                         </div>
                     </form>
                 </div>
-                <div class="panel-footer">Not User ? <a href="usersController.do?action=insert" class="btn btn-primary" role="button">Create account here.</a>
+                <div class="panel-footer">Not User ? <a href="usersController.do?action=insert" class="btn btn-primary" role="button" style="background-color: #337ab7">Create account here.</a>
                 </div>
             </div>
         </div>

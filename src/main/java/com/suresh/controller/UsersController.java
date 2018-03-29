@@ -1,21 +1,28 @@
 package com.suresh.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.text.ParseException;
+import java.io.InputStream;
+import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.suresh.model.User;
 import com.suresh.service.UserServiceImpl;
+import com.suresh.utils.SUtils;
 
 /**
  * Servlet implementation class UsersController
@@ -24,12 +31,16 @@ import com.suresh.service.UserServiceImpl;
  * @author Suresh babu J
  *
  */
+//@MultipartConfig(maxFileSize = 16177215) 
+@MultipartConfig(fileSizeThreshold=1024*1024*10, 	// 10 MB 
+maxFileSize=1024*1024*50,      	// 50 MB
+maxRequestSize=1024*1024*100)   	// 100 MB
 public class UsersController extends HttpServlet
 {
 	private static final Logger	logger		= LoggerFactory.getLogger(UsersController.class);
 	private static final long	serialVersionUID	= 1L;
 	
-	private UserServiceImpl		userServiceImpl = null;
+	private UserServiceImpl		userServiceImpl = new UserServiceImpl();
 	
 	private static String		INSERT_OR_EDIT		= "/WEB-INF/pages/user.jsp";
 	private static String		LIST_USER			= "/WEB-INF/pages/listUser.jsp";
@@ -38,7 +49,7 @@ public class UsersController extends HttpServlet
 	public UsersController()
 	{
 		super();
-		userServiceImpl = new UserServiceImpl();
+		//userServiceImpl = new UserServiceImpl();
 		logger.info("Inside UsersController construtor");
 	}
 	
@@ -91,13 +102,15 @@ public class UsersController extends HttpServlet
 		int addUser = 0;
 		try
 		{
-			user.setFirstName(request.getParameter("firstName"));
+			String firstName = request.getParameter("firstName");
+			user.setFirstName(firstName);
 			user.setLastName(request.getParameter("lastName"));
-			Date dob = new SimpleDateFormat("MM/dd/yyyy").parse(request.getParameter("dob"));
-			user.setDob(dob);
+			//https://jqueryui.com/resources/demos/datepicker/date-formats.html
+			
+			System.out.println(request.getParameter("dob"));
+			user.setDob(request.getParameter("dob"));
+			
 			user.setEmail(request.getParameter("email"));
-			user.setPassword(request.getParameter("password"));
-			//String action = request.getParameter("action");
 			String userid = request.getParameter("userId");
 			
 			if(userid != null && !userid.isEmpty() && Integer.valueOf(userid) > 0)
@@ -111,6 +124,29 @@ public class UsersController extends HttpServlet
 			}
 			else
 			{
+				user.setPassword(request.getParameter("password"));
+				File fileSaveDir = new File(SUtils.rootPath);
+				
+				if (!fileSaveDir.exists()) {
+		            fileSaveDir.mkdirs();
+		        }
+		        String saveToDB = null;
+		        String fileToDB = null;
+				
+		        for (Part pp : request.getParts())
+				{
+					String name = SUtils.getFileName(pp);
+					name = new File(name).getName();
+					
+					if(name != null && name.trim().length() > 1)
+					{
+						fileToDB = name;
+						saveToDB = SUtils.rootPath + File.separator + name;
+						pp.write(saveToDB);
+					}
+					
+				}
+				user.setFileName(fileToDB);
 				addUser = userServiceImpl.addUser(user);
 			}
 			
@@ -123,9 +159,9 @@ public class UsersController extends HttpServlet
 			}
 			
 		}
-		catch (ParseException e)
+		catch (Exception e)
 		{
-			logger.info("Exception ", e.getCause());
+			logger.info("Exception ", e.getMessage());
 		}
 		
 	}

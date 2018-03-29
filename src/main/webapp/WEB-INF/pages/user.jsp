@@ -22,7 +22,7 @@ body {
 </style>
 <body >
 <div class="container" style="margin-top:200px;">
-    <form method="POST" action='usersController.do' name="frmAddUser" class="form-horizontal">
+    <form method="POST" action='usersController.do' name="frmAddUser" class="form-horizontal" enctype="multipart/form-data">
     <input type ="hidden" value ="${userId}" name ="userId">
     <input type ="hidden" value ="${action}" id ="action">
     <div class="form-group">
@@ -42,7 +42,7 @@ body {
     <div class="form-group">
       <label class="control-label col-sm-2" for="dob">Date of Birth *</label>
       <div class="col-sm-8">
-        <input type="text" class="form-control" id="dob" required="required" placeholder="Enter Date of birth" name="dob" value="<fmt:formatDate pattern="MM/dd/yyyy" value="${user.dob}" />">
+        <input type="text" class="form-control" id="dob" required="required" placeholder="Enter Date of birth" name="dob" value="${user.dob}">
       </div>
     </div>
     
@@ -51,14 +51,24 @@ body {
       <div class="col-sm-8">
         <input type="text" class="form-control" id="email" placeholder="Enter email" name="email" value="${user.email}" required="required">
       </div>
+      
     </div>
-    
+  
     <c:if test="${action != 'edit'}">
+    
 	    <div class="form-group">
-	      <label class="control-label col-sm-2" for="password">Password *</label>
-	      <div class="col-sm-8">
-	        <input type="password" class="form-control" id="password" placeholder="Enter password" name="password"  required="required">
-	      </div>
+	    	<label class="control-label col-sm-2" for="exampleInputFile">File input</label>
+	    	 <div class="col-sm-8">
+	    		<input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp" name="fileName" value="${user.fileName}">
+	    		<small id="fileHelp" class="form-text text-muted">Max Size is 20 MB.</small>
+	    	</div>
+	  	</div>
+  
+	    <div class="form-group">
+		      <label class="control-label col-sm-2" for="password">Password *</label>
+		      <div class="col-sm-8">
+		        <input type="password" class="form-control" id="password" placeholder="Enter password" name="password"  required="required">
+		      </div>
 	    </div>
      </c:if>
         
@@ -92,7 +102,8 @@ body {
 
 	<script>
         $(function() {
-            $('input[name=dob]').datepicker();
+            $('input[name=dob]').datepicker({ dateFormat: 'yy-M-dd' });
+            // $('input[name=dob]').datepicker({ dateFormat: 'yy-mm-dd' });
         });
     </script>
     

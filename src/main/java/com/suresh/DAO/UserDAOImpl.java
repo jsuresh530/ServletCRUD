@@ -38,13 +38,14 @@ public class UserDAOImpl implements UserDAO, Constants
 		try
 		{
 			connection = DBUtil.getConnection();
-			preparedStatement = connection.prepareStatement("insert into users(firstname,lastname,dob,email,userTypeId,password) values (?, ?, ?, ?,?,? )");
+			preparedStatement = connection.prepareStatement("insert into users(firstname,lastname,dob,email,userTypeId,password, fileName) values (?, ?, ?, ?,?,?,?)");
 			preparedStatement.setString(1, user.getFirstName());
 			preparedStatement.setString(2, user.getLastName());
-			preparedStatement.setDate(3, new java.sql.Date(user.getDob().getTime()));
+			preparedStatement.setString(3, user.getDob());
 			preparedStatement.setString(4, user.getEmail());
 			preparedStatement.setInt(5, NUMBER_TWO);
 			preparedStatement.setString(6, user.getPassword());
+			preparedStatement.setString(7, user.getFileName());
 			
 			result = preparedStatement.executeUpdate();
 		}
@@ -98,7 +99,7 @@ public class UserDAOImpl implements UserDAO, Constants
 			// Parameters start with 1
 			preparedStatement.setString(1, user.getFirstName());
 			preparedStatement.setString(2, user.getLastName());
-			preparedStatement.setDate(3, new java.sql.Date(user.getDob().getTime()));
+			preparedStatement.setString(3, user.getDob());
 			preparedStatement.setString(4, user.getEmail());
 			preparedStatement.setInt(5, user.getUserid());
 			executeUpdate = preparedStatement.executeUpdate();
@@ -133,10 +134,11 @@ public class UserDAOImpl implements UserDAO, Constants
 				user.setUserid(resultSet.getInt("userid"));
 				user.setFirstName(resultSet.getString("firstname"));
 				user.setLastName(resultSet.getString("lastname"));
-				user.setDob(resultSet.getDate("dob"));
+				user.setDob(resultSet.getString("dob"));
 				user.setEmail(resultSet.getString("email"));
 				user.setPassword(resultSet.getString("password"));
 				user.setUserTypeId(resultSet.getInt("userTypeId"));
+				user.setFileName(resultSet.getString("fileName"));
 				users.add(user);
 			}
 		}
@@ -177,7 +179,7 @@ public class UserDAOImpl implements UserDAO, Constants
 			{
 				user.setFirstName(resultSet.getString("firstname"));
 				user.setLastName(resultSet.getString("lastname"));
-				user.setDob(resultSet.getDate("dob"));
+				user.setDob(resultSet.getString("dob"));
 				user.setEmail(resultSet.getString("email"));
 			}
 		}
